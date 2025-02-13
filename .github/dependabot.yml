@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    rebase-strategy: "auto"
+    directory: "/"
+    schedule:
+      interval: daily
+      time: '09:00'
+      timezone: 'Africa/Nairobi'
+    assignees:
+        - 'josephgodwinkimani'
+  - package-ecosystem: npm
+    rebase-strategy: "auto"
+    directory: "/"
+    schedule:
+      interval: daily
+      time: '09:00'
+      timezone: 'Africa/Nairobi'
+    assignees:
+        - 'josephgodwinkimani'

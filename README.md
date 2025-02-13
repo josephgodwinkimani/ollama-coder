@@ -28,4 +28,4 @@ OllamaCoder provides a basic, clean, intuitive interface for developers to:
 
    - Drag-and-drop file upload
    - Real-time chat interface
-   - Native dark mode support<imgsrc=alt=height=5%width=5%>OllamaCoderAninteractivecodeanalysisandassistantinterfaceforOllama,designedfordeveloperstogetinstantcodereviews,suggestions,andimprovementsusingcodinglanguagemodels.OverviewOllamaCoderprovidesabasic,clean,intuitiveinterfacefordevelopersto
+   - Native dark mode support

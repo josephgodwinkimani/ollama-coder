@@ -16,6 +16,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
     "validate": "npm-run-all --parallel type-check lint:* format:check",
     "validate:fix": "npm-run-all --sequential lint:fix lint:style:fix format",
+    "ci": "npm run validate:fix && npm run build",
+    "ci:verify": "npm run type-check && npm run lint && npm run lint:style && npm run build",
     "clean": "rimraf dist node_modules",
     "reset": "npm run clean && npm install",
     "prepare": "husky install",

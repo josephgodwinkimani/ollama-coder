@@ -1,0 +1,47 @@
+name: "My CodeQL Config"
+
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+paths:
+  - src
+  - test
+paths-ignore:
+  - node_modules
+  - '**/*.test.ts'
+  - '**/*.test.tsx'
+  - dist
+  - build
+
+query-filters:
+  - exclude:
+      problem.severity:
+        - warning
+        - recommendation
+
+extraction:
+  javascript:
+    index:
+      include:
+        - "**/*.js"
+        - "**/*.jsx"
+        - "**/*.ts"
+        - "**/*.tsx"
+      exclude:
+        - "**/*.d.ts"
+        - "node_modules/**"
+        - "dist/**"
+        - "build/**"
+      dependencies:
+        - typescript
+  typescript:
+    index:
+      include:
+        - "**/*.ts"
+        - "**/*.tsx"
+      exclude:
+        - "**/*.d.ts"
+        - "node_modules/**"
+        - "dist/**"
+        - "build/**"
