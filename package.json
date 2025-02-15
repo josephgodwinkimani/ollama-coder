@@ -25,13 +25,8 @@
     "preview": "vite preview"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "src/**/*.{css}": [
-      "stylelint --fix",
-      "prettier --write"
+    "src/**/*.{ts,tsx,css}": [
+      "npm run validate:fix"
     ]
   },
   "dependencies": {

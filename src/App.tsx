@@ -69,7 +69,7 @@ function App() {
   const loadModels = async () => {
     try {
       const response = await ollamaApi.listModels();
-      setModels(response?.models);
+      setModels(response?.models as Model[]);
 
       // Validate saved model against available models
       const validModel = modelStorage.validateSavedModel(response.models.map(m => m.name));
