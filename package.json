@@ -20,7 +20,7 @@
     "ci:verify": "npm run type-check && npm run lint && npm run lint:style && npm run build",
     "clean": "rimraf dist node_modules",
     "reset": "npm run clean && npm install",
-    "prepare": "husky install",
+    "prepare": "husky",
     "precommit": "lint-staged",
     "preview": "vite preview"
   },
