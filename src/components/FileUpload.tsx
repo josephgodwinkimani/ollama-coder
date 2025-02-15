@@ -11,19 +11,47 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileContent }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const allowedExtensions = [
-    '.py',
-    '.ts',
-    '.tsx',
+    '.bash',
+    '.sh', // Bash
+    '.c', // C
+    '.cpp',
+    '.cc',
+    '.h', // C++
+    '.cs', // C#
+    '.css', // CSS
+    'Dockerfile', // Docker
+    '.go', // Go
+    '.graphql',
+    '.gql', // GraphQL
+    '.java', // Java
     '.js',
-    '.jsx',
-    '.php',
-    '.css',
-    '.scss',
-    '.sass',
-    '.java',
+    '.jsx', // JavaScript
+    '.json', // JSON
     '.kt',
-    '.cs',
-    '.txt',
+    '.kts', // Kotlin
+    '.tex', // LaTeX
+    '.md',
+    '.markdown', // Markdown
+    '.m',
+    '.mat', // MATLAB
+    '.pl',
+    '.pm', // Perl
+    '.php', // PHP
+    '.py', // Python
+    '.r', // R
+    '.rb', // Ruby
+    '.rs', // Rust
+    '.scala',
+    '.sc', // Scala
+    '.sql', // SQL
+    '.swift', // Swift
+    '.ts',
+    '.tsx', // TypeScript
+    '.yml',
+    '.yaml', // YAML
+    '.txt', // Plain text
+    '.scss',
+    '.sass', // SASS/SCSS
   ];
 
   const handleDragOver = (e: React.DragEvent) => {

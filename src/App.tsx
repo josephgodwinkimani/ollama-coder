@@ -50,6 +50,7 @@ function App() {
 
     // Update time every second
     const updateDateTime = () => {
+      console.log(dateTime);
       const now = new Date();
       const formattedDate = formatDateTime(now);
       setDateTime(formattedDate);
@@ -179,9 +180,11 @@ function App() {
 
       // Save to storage
       await storageService.saveChat(newMessages, selectedModel);
+      console.log(waitEndTime);
     } catch (error) {
       console.error('Error sending message:', error);
     } finally {
+      console.log(waitEndTime);
       setIsLoading(false);
       setWaitStartTime(null);
       setWaitEndTime(null);
