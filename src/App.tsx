@@ -181,6 +181,10 @@ function App() {
       // Save to storage
       await storageService.saveChat(newMessages, selectedModel);
       console.log(waitEndTime);
+
+      // Play sound
+      const audio = new Audio('/sounds/notification-sound-3-262896.mp3');
+      audio.play();
     } catch (error) {
       console.error('Error sending message:', error);
     } finally {
@@ -188,6 +192,10 @@ function App() {
       setIsLoading(false);
       setWaitStartTime(null);
       setWaitEndTime(null);
+
+      // Play sound
+      const audio = new Audio('/sounds/windows-error-sound-effect-35894.mp3');
+      audio.play();
     }
   };
 
