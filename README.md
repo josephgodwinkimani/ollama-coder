@@ -1,6 +1,6 @@
 # <img src="public/images/ollama.png" alt="Ollama" height=5% width=5%> OllamaCoder 
 
-An interactive code analysis and assistant interface for Ollama, designed for developers to get instant code reviews, suggestions, and improvements using coding language models.
+An interactive code analysis and assistant interface for Ollama, designed for developers to get instant code reviews, suggestions, and improvements using coding language models. You can also use [code2prompt](https://github.com/mufeedvh/code2prompt) to generate a prompt from a codebase directory and use the output with a prompt.
 
 ## Overview
 
