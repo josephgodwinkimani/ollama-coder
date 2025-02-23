@@ -1,15 +1,7 @@
-interface ChatEntry {
-  id: number;
-  messages: Array<{
-    role: 'assistant' | 'user';
-    content: string;
-  }>;
-  timestamp: string;
-  model: string;
-}
+import { Message, ChatEntry } from '../types/types';
 
 class StorageService {
-  private readonly CHAT_KEY = 'currentChat';
+  private readonly STORAGE_KEY = 'ollama-chats';
   private broadcastChannel: BroadcastChannel;
 
   constructor() {
@@ -36,50 +28,46 @@ class StorageService {
     });
   }
 
-  async saveChat(
-    messages: Array<{ role: 'assistant' | 'user'; content: string }>,
-    model: string
-  ): Promise<void> {
+  async saveChat(messages: Message[], model: string, chatEntry: ChatEntry): Promise<void> {
     try {
-      const chatEntry: ChatEntry = {
-        id: 1,
-        messages,
-        timestamp: new Date().toISOString(),
-        model,
-      };
-
-      // Save to localStorage for persistence
-      localStorage.setItem(this.CHAT_KEY, JSON.stringify(chatEntry));
-
-      // Notify other tabs
+      const chats = await this.loadAllChats();
+      const updatedChats = [...chats.filter(ch => ch.id !== chatEntry.id), chatEntry];
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updatedChats));
       this.notifyOtherTabs(chatEntry);
     } catch (error) {
       console.error('Error saving chat:', error);
+    }
+  }
+
+  async loadAllChats(): Promise<ChatEntry[]> {
+    try {
+      const chats = localStorage.getItem(this.STORAGE_KEY);
+      return chats ? JSON.parse(chats) : [];
+    } catch (error) {
+      console.error('Error loading chats:', error);
+      return [];
+    }
+  }
+
+  async mergeChats(newChats: ChatEntry[]): Promise<void> {
+    try {
+      const existingChats = await this.loadAllChats();
+      const mergedChats = [...existingChats, ...newChats];
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(mergedChats));
+
+      // Notify other tabs about the update
+      this.broadcastChannel.postMessage({
+        type: 'CHATS_IMPORTED',
+        chats: mergedChats,
+      });
+    } catch (error) {
+      console.error('Error merging chats:', error);
       throw error;
     }
   }
 
-  async loadLatestChat(): Promise<ChatEntry | null> {
-    try {
-      const savedChat = localStorage.getItem(this.CHAT_KEY);
-      if (savedChat) {
-        return JSON.parse(savedChat);
-      }
-      return null;
-    } catch (error) {
-      console.error('Error loading chat:', error);
-      return null;
-    }
-  }
-
-  async clearStorage(): Promise<void> {
-    try {
-      localStorage.removeItem(this.CHAT_KEY);
-      this.notifyOtherTabs({ id: 1, messages: [], timestamp: new Date().toISOString(), model: '' });
-    } catch (error) {
-      console.error('Error clearing storage:', error);
-      throw error;
-    }
+  clearStorage(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 }
 

@@ -12,8 +12,16 @@ export interface Message {
 }
 
 export interface ChatEntry {
-  id: number;
+  id: string; // Changed from number to string to match UUID usage
   messages: Message[];
   timestamp: string;
   model: string;
+}
+
+export interface ChatHistory {
+  id: string;
+  title: string;
+  messages: Message[];
+  model: string;
+  timestamp: string;
 }
